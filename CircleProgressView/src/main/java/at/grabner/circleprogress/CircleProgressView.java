@@ -26,6 +26,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -616,6 +617,21 @@ public class CircleProgressView extends View {
         mTextSize = textSize;
         mIsAutoTextSize = false;
     }
+
+    /**
+	 * Text size of the text string. Disables auto text size
+	 * If auto text size is on, use {@link #setTextScale(float)} to scale textSize.
+	 *
+	 * @param unit The unit type.
+	 * @param size The text size of the unit.
+	 */
+	public void setTextSize(int unit, float size)
+	{
+		int pixel = (int)TypedValue.applyDimension(unit, size, getResources().getDisplayMetrics());
+		this.mTextPaint.setTextSize(pixel);
+		mTextSize = (int)size;
+		mIsAutoTextSize = false;
+	}
 
     public String getUnit() {
         return mUnit;
